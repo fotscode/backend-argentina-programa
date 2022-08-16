@@ -22,5 +22,7 @@ public class AppUser {
   private String password;
   @ManyToMany(fetch = FetchType.EAGER)
   private Collection<Role> roles = new ArrayList<>();
-
+  public void addRole(Role role){
+    this.roles.add(role);
+  }
 }
