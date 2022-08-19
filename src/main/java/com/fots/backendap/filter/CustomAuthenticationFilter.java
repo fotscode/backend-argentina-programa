@@ -23,6 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.fots.backendap.model.AppUser;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,13 +38,19 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
-            throws AuthenticationException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        log.info("user is {}, pw is {}", username, password);
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
-                password);
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+        UsernamePasswordAuthenticationToken authenticationToken=null;
+        try {
+            AppUser user = new Gson().fromJson(request.getReader(), AppUser.class);
+            log.info("user is {}, pw is {}", user.getUsername(), user.getPassword());
+            authenticationToken = new UsernamePasswordAuthenticationToken(
+                    user.getUsername(),
+                    user.getPassword());
+
+        } catch (JsonSyntaxException | JsonIOException | IOException e) {
+            e.printStackTrace();
+        }
+        
         return authenticationManager.authenticate(authenticationToken);
     }
 
@@ -63,9 +74,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
                 .withClaim("roles",
                         user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
-        Map<String, String> tokens=new HashMap<>();
-        tokens.put("access_token",access_token);
-        tokens.put("refresh_token",refresh_token);
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access_token", access_token);
+        tokens.put("refresh_token", refresh_token);
         response.setContentType(org.springframework.http.MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
