@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/profile")
 @RequiredArgsConstructor
 @Slf4j
+@CrossOrigin
 public class ProfileController {
     private final ProfileServiceImpl profileService;
 
