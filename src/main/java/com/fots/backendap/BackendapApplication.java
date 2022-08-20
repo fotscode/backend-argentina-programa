@@ -7,10 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.fots.backendap.model.AppUser;
-import com.fots.backendap.model.Profile;
 import com.fots.backendap.model.Role;
 import com.fots.backendap.repositories.ProfileRepo;
 import com.fots.backendap.service.UserService;
@@ -33,9 +31,6 @@ public class BackendapApplication {
       userService.saveRole(new Role(null, "ROLE_USER"));
       userService.saveUser(new AppUser(null, "john", "1234", new ArrayList<>()));
       userService.addRoleToUser("john", "ROLE_USER");
-      profileRepo
-          .save(new Profile(null, "prueba".getBytes(), "linux".getBytes(), "Nombre", "Full Stack Developer Jr.", "Descripcion"));
     };
   }
-
 }
