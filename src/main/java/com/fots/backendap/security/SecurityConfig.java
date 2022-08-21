@@ -12,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.fots.backendap.filter.CustomAuthenticationFilter;
 import com.fots.backendap.filter.CustomAuthorizationFilter;
@@ -38,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
     customAuthenticationFilter.setFilterProcessesUrl("/api/login");
     http.csrf().disable();
-    http.cors();
+    http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/**").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/profile/**").permitAll(); // TODO change
@@ -54,5 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public AuthenticationManager authenticationManagerBean() throws Exception {
     return super.authenticationManagerBean();
+  }
+
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+    return source;
   }
 }
