@@ -29,8 +29,8 @@ public class BackendapApplication {
   CommandLineRunner run(UserService userService, ProfileRepo profileRepo) {
     return args -> {
       userService.saveRole(new Role(null, "ROLE_USER"));
-      userService.saveUser(new AppUser(null, "john", "1234", new ArrayList<>()));
-      userService.addRoleToUser("john", "ROLE_USER");
+      userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
+      userService.addRoleToUser("admin", "ROLE_USER");
     };
   }
 }
