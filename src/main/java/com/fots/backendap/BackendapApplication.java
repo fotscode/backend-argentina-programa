@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.fots.backendap.model.AppUser;
+import com.fots.backendap.model.Profile;
 import com.fots.backendap.model.Role;
 import com.fots.backendap.repositories.ProfileRepo;
 import com.fots.backendap.service.UserService;
@@ -31,6 +32,8 @@ public class BackendapApplication {
       userService.saveRole(new Role(null, "ROLE_USER"));
       userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
       userService.addRoleToUser("admin", "ROLE_USER");
+      profileRepo.save(new Profile(null,"imagen1".getBytes(),"imagen2".getBytes(),"Nombre","Titulo","Descripcion"));
+       
     };
   }
 }
