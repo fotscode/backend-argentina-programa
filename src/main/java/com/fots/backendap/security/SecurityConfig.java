@@ -43,8 +43,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.authorizeRequests().antMatchers(HttpMethod.GET, "/experience/**").permitAll();
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/experience/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/experience/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.PUT, "/experience/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.GET, "/education/**").permitAll();
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/education/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/education/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.PUT, "/education/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests().antMatchers(HttpMethod.GET, "/profile/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/profile/**").permitAll(); // TODO change
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/profile/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/login/**", "/api/token/refresh/**").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").hasAnyAuthority("ROLE_USER");
@@ -62,7 +70,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+    CorsConfiguration corsConfiguration=new CorsConfiguration().applyPermitDefaultValues();
+    corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+    corsConfiguration.addAllowedMethod(HttpMethod.PUT);
+    source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
 }
