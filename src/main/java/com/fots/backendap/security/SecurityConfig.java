@@ -43,11 +43,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/skill/**","/experience/**","/education/**","/profile/**","/api/login/**", "/api/token/refresh/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/skill/**","/experience/**","/education/**","/profile/**","/api/user/save/**").hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/skill/**","/experience/**","/education/**","/profile/**").hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().antMatchers(HttpMethod.PUT, "/skill/**","/experience/**","/education/**","/profile/**").hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
+            "/profile/**", "/api/login/**", "/api/token/refresh/**")
+        .permitAll();
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
+            "/profile/**", "/api/user/save/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.PUT, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.GET, "/project/**", "/api/user/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -62,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration corsConfiguration=new CorsConfiguration().applyPermitDefaultValues();
+    CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
     source.registerCorsConfiguration("/**", corsConfiguration);
