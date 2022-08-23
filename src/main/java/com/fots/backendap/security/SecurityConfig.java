@@ -45,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
-            "/profile/**", "/api/login/**", "/api/token/refresh/**")
+        "/profile/**", "/api/login/**", "/api/token/refresh/**")
         .permitAll();
     http.authorizeRequests()
         .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
-            "/profile/**", "/api/user/save/**")
+        "/profile/**", "/api/user/save/**")
         .hasAnyAuthority("ROLE_USER");
     http.authorizeRequests()
         .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
