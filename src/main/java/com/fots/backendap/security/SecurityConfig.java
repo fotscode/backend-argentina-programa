@@ -2,6 +2,7 @@ package com.fots.backendap.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -81,6 +82,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //    "Cache-Control", "Content-Type", "Accept"));
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD);
+    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
