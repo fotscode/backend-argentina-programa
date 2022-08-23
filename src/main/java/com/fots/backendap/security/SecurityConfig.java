@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
+    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
     http.authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
             "/profile/**", "/api/login/**", "/api/token/refresh/**")
@@ -75,13 +75,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
     corsConfiguration.setAllowCredentials(true);
-    corsConfiguration.setAllowedOrigins(Arrays.asList("*","https://frontend-argentina-progr-4954e.web.app"));
-    corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
+    corsConfiguration.setAllowedOrigins(Arrays.asList("*", "https://frontend-argentina-progr-4954e.web.app"));
+    corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
     corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin","X-Requested-With", "X-Auth-Token",
-        "Cache-Control", "Content-Type"));
+        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "X-Requested-With", "X-Auth-Token",
+        "Cache-Control", "Content-Type", "Accept"));
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
