@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
     corsConfiguration.addAllowedOrigin("*");
+    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
