@@ -1,7 +1,5 @@
 package com.fots.backendap.security;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -75,13 +73,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration corsConfiguration = new CorsConfiguration();
-    corsConfiguration.setAllowCredentials(true);
-    corsConfiguration.setAllowedOrigins(Arrays.asList("*", "https://frontend-argentina-progr-4954e.web.app"));
-    corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
-    corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "X-Requested-With", "X-Auth-Token",
-        "Cache-Control", "Content-Type", "Accept"));
+    CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+    //corsConfiguration.setAllowedOrigins(Arrays.asList("*", "https://frontend-argentina-progr-4954e.web.app"));
+    //corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"));
+    //corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
+    //    "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "X-Requested-With", "X-Auth-Token",
+    //    "Cache-Control", "Content-Type", "Accept"));
+    corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
+    corsConfiguration.addAllowedMethod(HttpMethod.PUT);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
