@@ -76,10 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+    corsConfiguration.setAllowCredentials(true);
     corsConfiguration.setAllowedOrigins(Arrays.asList("*","https://frontend-argentina-progr-4954e.web.app"));
     corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
     corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
-        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin",
+        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin","X-Requested-With", "X-Auth-Token",
         "Cache-Control", "Content-Type"));
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;

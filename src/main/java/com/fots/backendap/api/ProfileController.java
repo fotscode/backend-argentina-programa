@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/profile")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin("*")
 public class ProfileController {
     private final ProfileServiceImpl profileService;
 

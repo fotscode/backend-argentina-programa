@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/skill")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin("*")
 public class SkillController {
     private final SkillServiceImpl skillService;
     

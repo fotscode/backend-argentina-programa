@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/education")
 @RequiredArgsConstructor
-@CrossOrigin
+@CrossOrigin("*")
 public class EducationController {
      private final EducationServiceImpl educationService;
 
