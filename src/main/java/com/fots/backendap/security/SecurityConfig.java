@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-    corsConfiguration.setAllowedOrigins(Arrays.asList("*","https://boot-hheroku.herokuapp.com"));
+    corsConfiguration.setAllowedOrigins(Arrays.asList("*","https://frontend-argentina-progr-4954e.web.app"));
     corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
     corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
         "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin",
