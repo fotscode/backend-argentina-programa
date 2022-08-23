@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fots.backendap.model.Experience;
 import com.fots.backendap.model.Response;
-import com.fots.backendap.service.ExperienceServiceImpl;
+import com.fots.backendap.service.implementations.ExperienceServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 

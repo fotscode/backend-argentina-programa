@@ -1,10 +1,11 @@
-package com.fots.backendap.service;
+package com.fots.backendap.service.implementations;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fots.backendap.model.Profile;
 import com.fots.backendap.repositories.ProfileRepo;
+import com.fots.backendap.service.ProfileService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fots.backendap.model.Education;
 import com.fots.backendap.model.Response;
-import com.fots.backendap.service.EducationServiceImpl;
+import com.fots.backendap.service.implementations.EducationServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 

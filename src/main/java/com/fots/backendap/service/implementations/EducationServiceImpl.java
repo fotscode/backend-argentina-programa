@@ -1,4 +1,4 @@
-package com.fots.backendap.service;
+package com.fots.backendap.service.implementations;
 
 
 import java.util.Collection;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.fots.backendap.model.Education;
 import com.fots.backendap.repositories.EducationRepo;
+import com.fots.backendap.service.EducationService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

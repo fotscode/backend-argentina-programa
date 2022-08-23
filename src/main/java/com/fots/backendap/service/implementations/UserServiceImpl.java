@@ -1,4 +1,4 @@
-package com.fots.backendap.service;
+package com.fots.backendap.service.implementations;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +10,7 @@ import com.fots.backendap.model.AppUser;
 import com.fots.backendap.model.Role;
 import com.fots.backendap.repositories.RoleRepo;
 import com.fots.backendap.repositories.UserRepo;
+import com.fots.backendap.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

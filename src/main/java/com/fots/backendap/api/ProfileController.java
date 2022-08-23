@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fots.backendap.model.Profile;
 import com.fots.backendap.model.Response;
-import com.fots.backendap.service.ProfileServiceImpl;
+import com.fots.backendap.service.implementations.ProfileServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
