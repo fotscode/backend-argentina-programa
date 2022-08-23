@@ -1,5 +1,7 @@
 package com.fots.backendap.security;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -45,11 +47,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
-        "/profile/**", "/api/login/**", "/api/token/refresh/**")
+            "/profile/**", "/api/login/**", "/api/token/refresh/**")
         .permitAll();
     http.authorizeRequests()
         .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
-        "/profile/**", "/api/user/save/**")
+            "/profile/**", "/api/user/save/**")
         .hasAnyAuthority("ROLE_USER");
     http.authorizeRequests()
         .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
@@ -73,10 +75,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-    corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
-    corsConfiguration.addAllowedMethod(HttpMethod.PUT);
-    corsConfiguration.addAllowedOrigin("*");
-    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
+    corsConfiguration.setAllowedOrigins(Arrays.asList("*","https://boot-hheroku.herokuapp.com"));
+    corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"));
+    corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
+        "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin",
+        "Cache-Control", "Content-Type"));
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
