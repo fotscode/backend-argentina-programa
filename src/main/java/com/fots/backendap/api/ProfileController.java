@@ -18,12 +18,10 @@ import com.fots.backendap.model.Response;
 import com.fots.backendap.service.implementations.ProfileServiceImpl;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/profile")
 @RequiredArgsConstructor
-@Slf4j
 @CrossOrigin
 public class ProfileController {
     private final ProfileServiceImpl profileService;
