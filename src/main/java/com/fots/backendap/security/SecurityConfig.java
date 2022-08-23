@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //    "Cache-Control", "Content-Type", "Accept"));
     corsConfiguration.addAllowedOrigin("*");
     corsConfiguration.addAllowedOrigin("https://fast-lowlands-67511.herokuapp.com");
+    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
     corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS);
