@@ -31,11 +31,10 @@ public class BackendapApplication {
   @Bean
   CommandLineRunner run(UserService userService, ProfileRepo profileRepo) {
     return args -> {
-      userService.saveRole(new Role(null, "ROLE_USER"));
-      userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
-      userService.addRoleToUser("admin", "ROLE_USER");
-      profileRepo.save(new Profile(null,"imagen1".getBytes(),"imagen2".getBytes(),"Nombre","Titulo","Descripcion"));
-       
+      //userService.saveRole(new Role(null, "ROLE_USER"));
+      //userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
+      //userService.addRoleToUser("admin", "ROLE_USER");
+      //profileRepo.save(new Profile(null,"imagen1".getBytes(),"imagen2".getBytes(),"Nombre","Titulo","Descripcion"));
     };
   }
 }
