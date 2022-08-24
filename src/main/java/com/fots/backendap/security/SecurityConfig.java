@@ -1,8 +1,9 @@
 package com.fots.backendap.security;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -80,19 +81,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
     //    "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "X-Requested-With", "X-Auth-Token",
     //    "Cache-Control", "Content-Type", "Accept"));
-    corsConfiguration.setMaxAge(3600L);
-    corsConfiguration.addAllowedOrigin("*");
-    corsConfiguration.addAllowedOrigin("https://fast-lowlands-67511.herokuapp.com");
-    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
+    corsConfiguration.setAllowCredentials(true);
+    corsConfiguration.setExposedHeaders(Arrays.asList("*"));
+    corsConfiguration.setAllowedOriginPatterns(Arrays.asList("*"));
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_HEADERS);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_REQUEST_METHOD);
-    corsConfiguration.addAllowedHeader(HttpHeaders.ACCESS_CONTROL_MAX_AGE);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
