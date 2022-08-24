@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**").permitAll();
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**","/api/login/**").permitAll();
     http.authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
             "/profile/**", "/api/login/**", "/api/token/refresh/**")
