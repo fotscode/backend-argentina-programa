@@ -28,9 +28,6 @@ public class BackendapApplication {
   @Bean
   CommandLineRunner run(UserService userService, ProfileRepo profileRepo) {
     return args -> {
-      Role user=new Role(null, "ROLE_USER");
-      userService.saveRole(user);
-      userService.saveUser(new AppUser(null, "admin", "1234", Arrays.asList(user)));
       //userService.addRoleToUser("admin", "ROLE_USER");
       //profileRepo.save(new Profile(null,"imagen1".getBytes(),"imagen2".getBytes(),"Nombre","Titulo","Descripcion"));
     };
