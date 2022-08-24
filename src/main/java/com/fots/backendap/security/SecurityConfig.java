@@ -80,6 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //corsConfiguration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Access-Control-Allow-Origin",
     //    "Access-Control-Request-Method", "Access-Control-Request-Headers", "Origin", "X-Requested-With", "X-Auth-Token",
     //    "Cache-Control", "Content-Type", "Accept"));
+    corsConfiguration.setMaxAge(3600L);
     corsConfiguration.addAllowedOrigin("*");
     corsConfiguration.addAllowedOrigin("https://fast-lowlands-67511.herokuapp.com");
     corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
