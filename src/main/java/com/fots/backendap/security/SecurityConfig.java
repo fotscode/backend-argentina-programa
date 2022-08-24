@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.authorizeRequests()
         .antMatchers(HttpMethod.PUT, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
         .hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/project/**", "/api/user/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
     http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
