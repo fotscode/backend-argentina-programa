@@ -15,7 +15,7 @@ import com.fots.backendap.model.Role;
 import com.fots.backendap.repositories.ProfileRepo;
 import com.fots.backendap.service.UserService;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication()
 public class BackendapApplication {
 
   public static void main(String[] args) {
