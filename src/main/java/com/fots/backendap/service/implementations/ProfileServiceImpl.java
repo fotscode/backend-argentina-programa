@@ -1,5 +1,8 @@
 package com.fots.backendap.service.implementations;
 
+import java.util.Collection;
+
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,5 +29,12 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile get(Long id) {
         log.info("Fetching id: {}", id);
         return profileRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public Collection<Profile> list(int limit) {
+        log.info("Fetching profiles");
+        return profileRepo.findAll(PageRequest.of(0,limit)).toList();
+
     }
 }

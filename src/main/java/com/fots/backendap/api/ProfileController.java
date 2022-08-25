@@ -50,4 +50,16 @@ public class ProfileController {
                         .build());
 
     }
+    @GetMapping("/list")
+    public ResponseEntity<Response> getProfiles() {
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(LocalDateTime.now())
+                        .data(Map.of("profiles", profileService.list(30)))
+                        .message("Profile retrieved")
+                        .status(HttpStatus.OK)
+                        .statusCode(HttpStatus.OK.value())
+                        .build()
+        );
+    }
 }
