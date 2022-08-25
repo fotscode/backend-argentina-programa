@@ -45,29 +45,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.PUT, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.HEAD, "/**").permitAll();
-    //http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/save/**","/api/login/**").permitAll();
-    //http.authorizeRequests()
-    //    .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
-    //        "/profile/**", "/api/login/**", "/api/token/refresh/**")
-    //    .permitAll();
-    //http.authorizeRequests()
-    //    .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
-    //        "/profile/**")
-    //    .hasAnyAuthority("ROLE_USER");
-    //http.authorizeRequests()
-    //    .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
-    //    .hasAnyAuthority("ROLE_USER");
-    //http.authorizeRequests()
-    //    .antMatchers(HttpMethod.PUT, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
-    //    .hasAnyAuthority("ROLE_USER");
-    //http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**").hasAnyAuthority("ROLE_USER");
-    //http.authorizeRequests().anyRequest().authenticated();
+    http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/login/**").permitAll();
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
+            "/profile/**", "/api/login/**")
+        .permitAll();
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
+            "/profile/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests()
+        .antMatchers(HttpMethod.PUT, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
+        .hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**", "/api/token/refresh/**").hasAnyAuthority("ROLE_USER");
+    http.authorizeRequests().anyRequest().authenticated();
     http.addFilter(customAuthenticationFilter);
     http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
