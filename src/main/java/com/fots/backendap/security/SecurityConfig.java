@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.cors().configurationSource(corsConfigurationSource());
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
     http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/login/**").permitAll();
     http.authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
@@ -76,10 +77,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration corsConfiguration = new CorsConfiguration();
-    corsConfiguration.setAllowCredentials(true);
-    corsConfiguration.setExposedHeaders(Arrays.asList("*"));
-    corsConfiguration.setAllowedOriginPatterns(Arrays.asList("*"));
-    corsConfiguration.setAllowedMethods(Arrays.asList("*"));
+    corsConfiguration.setExposedHeaders(Arrays.asList(CorsConfiguration.ALL));
+    corsConfiguration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
+    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
+    corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
   }
