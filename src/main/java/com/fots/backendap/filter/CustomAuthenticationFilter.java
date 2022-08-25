@@ -75,6 +75,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("access_token", access_token);
         tokens.put("refresh_token", refresh_token);
         response.setContentType(org.springframework.http.MediaType.APPLICATION_JSON_VALUE);
+        response.setHeader("Access-Control-Allow-Origin", "*");
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
 
