@@ -80,7 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
     corsConfiguration.setExposedHeaders(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
-    corsConfiguration.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
     corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app/");
