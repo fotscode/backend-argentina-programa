@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.fots.backendap.model.AppUser;
 import com.fots.backendap.model.Role;
@@ -28,13 +30,23 @@ public class BackendapApplication {
   }
 
   @Bean
-  CommandLineRunner run(UserService userService, UserRepo userRepo, RoleRepo roleRepo,ProfileRepo profileRepo) {
+  CommandLineRunner run(UserService userService, UserRepo userRepo, RoleRepo roleRepo, ProfileRepo profileRepo) {
     return args -> {
       userRepo.deleteAll();
       roleRepo.deleteAll();
       userService.saveRole(new Role(null, "ROLE_USER"));
       userService.saveUser(new AppUser(null, "admin", "1234", new ArrayList<>()));
       userService.addRoleToUser("admin", "ROLE_USER");
+    };
+  }
+
+  @Bean
+  public WebMvcConfigurer corsConfigurer() {
+    return new WebMvcConfigurer() {
+      @Override
+      public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("*");
+      }
     };
   }
 }
