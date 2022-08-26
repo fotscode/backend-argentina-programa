@@ -1,6 +1,6 @@
 package com.fots.backendap.security;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -65,7 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .hasAnyAuthority("ROLE_USER")
         .and().authorizeRequests().anyRequest().authenticated()
         .and().addFilter(customAuthenticationFilter)
-        .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
+        .httpBasic();
   }
 
   @Bean
@@ -77,11 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+    CorsConfiguration corsConfiguration = new CorsConfiguration();
     corsConfiguration.setAllowCredentials(true);
     corsConfiguration.addAllowedOriginPattern("*");
-    corsConfiguration.setExposedHeaders(Arrays.asList(CorsConfiguration.ALL));
-    corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
+    corsConfiguration.addAllowedMethod(HttpMethod.GET);
+    corsConfiguration.addAllowedMethod(HttpMethod.POST);
     corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
     corsConfiguration.addAllowedMethod(HttpMethod.PUT);
     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
@@ -90,7 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     corsConfiguration.addAllowedHeader("Content-Type");
     corsConfiguration.addAllowedHeader("Accept");
     corsConfiguration.addAllowedHeader("Authorization");
-    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app/");
+    corsConfiguration.addAllowedHeader("X-PINGOTHER");
+    corsConfiguration.setExposedHeaders(List.of("Authorization"));
+    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app");
+    corsConfiguration.addAllowedOrigin("http://localhost:4200");
     corsConfiguration.setMaxAge(1728000L);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
