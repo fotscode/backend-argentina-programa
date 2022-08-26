@@ -83,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     corsConfiguration.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
+    corsConfiguration.addAllowedOrigin("https://frontend-argentina-progr-4954e.web.app/");
     corsConfiguration.setMaxAge(1728000L);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
