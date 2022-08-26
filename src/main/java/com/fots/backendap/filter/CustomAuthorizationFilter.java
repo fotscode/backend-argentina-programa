@@ -65,6 +65,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
             } else {
+                response.setHeader("Access-Control-Allow-Origin", "*");
                 filterChain.doFilter(request, response);
             }
         }
