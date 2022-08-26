@@ -42,29 +42,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
     customAuthenticationFilter.setFilterProcessesUrl("/api/login");
-    http.csrf().disable();
-    http.cors().configurationSource(corsConfigurationSource());
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    http.authorizeRequests().antMatchers(HttpMethod.OPTIONS,"/**").permitAll();
-    http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/login/**").permitAll();
-    http.authorizeRequests()
+    http.csrf().disable()
+        .cors().configurationSource(corsConfigurationSource())
+        .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+        .and().authorizeRequests().antMatchers(HttpMethod.POST, "/api/login/**").permitAll()
+        .and().authorizeRequests()
         .antMatchers(HttpMethod.GET, "/project/**", "/skill/**", "/experience/**", "/education/**",
             "/profile/**", "/api/login/**")
-        .permitAll();
-    http.authorizeRequests()
+        .permitAll()
+        .and().authorizeRequests()
         .antMatchers(HttpMethod.POST, "/project/**", "/skill/**", "/experience/**", "/education/**",
             "/profile/**")
-        .hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests()
+        .hasAnyAuthority("ROLE_USER")
+        .and().authorizeRequests()
         .antMatchers(HttpMethod.DELETE, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
-        .hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests()
+        .hasAnyAuthority("ROLE_USER")
+        .and().authorizeRequests()
         .antMatchers(HttpMethod.PUT, "/project/**", "/skill/**", "/experience/**", "/education/**", "/profile/**")
-        .hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**", "/api/token/refresh/**").hasAnyAuthority("ROLE_USER");
-    http.authorizeRequests().anyRequest().authenticated();
-    http.addFilter(customAuthenticationFilter);
-    http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
+        .hasAnyAuthority("ROLE_USER")
+        .and().authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**", "/api/token/refresh/**")
+        .hasAnyAuthority("ROLE_USER")
+        .and().authorizeRequests().anyRequest().authenticated()
+        .and().addFilter(customAuthenticationFilter)
+        .addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
 
   @Bean
@@ -81,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     corsConfiguration.setAllowedOrigins(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.setAllowedOriginPatterns(Arrays.asList(CorsConfiguration.ALL));
     corsConfiguration.setAllowedMethods(Arrays.asList(CorsConfiguration.ALL));
+    corsConfiguration.addAllowedMethod(HttpMethod.OPTIONS);
     corsConfiguration.setMaxAge(1728000L);
     source.registerCorsConfiguration("/**", corsConfiguration);
     return source;
